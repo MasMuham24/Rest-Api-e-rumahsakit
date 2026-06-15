@@ -1,55 +1,55 @@
-# 🏥 REST API Rumah Sakit Online
+# 🏥 Online Hospital REST API
 
-REST API Rumah Sakit Online adalah backend berbasis Laravel yang menyediakan layanan manajemen data rumah sakit secara terpusat. API ini mendukung autentikasi pengguna, pengelolaan data dokter, pasien, rekam medis, resep obat, serta manajemen akun admin.
+A RESTful API built with Laravel for managing hospital operations digitally. This project provides secure authentication and complete CRUD functionality for administrators, doctors, patients, medical records, and prescriptions.
 
-## ✨ Fitur Utama
+## 🚀 Features
 
-### 🔐 Authentication
+### Authentication
 
-* Register akun
-* Login pengguna
-* Logout pengguna
-* Token-based authentication
+* User Registration
+* User Login
+* User Logout
+* Token-Based Authentication
 
-### 👨‍💼 Manajemen Admin
+### Admin Management
 
-* Menampilkan daftar admin
-* Menambahkan admin baru
-* Melihat detail admin
-* Mengubah data admin
-* Menghapus admin
+* Create Admin
+* View Admin List
+* View Admin Details
+* Update Admin Information
+* Delete Admin
 
-### 👨‍⚕️ Manajemen Dokter
+### Doctor Management
 
-* Menampilkan daftar dokter
-* Menambahkan dokter baru
-* Melihat detail dokter
-* Mengubah data dokter
-* Menghapus dokter
+* Create Doctor
+* View Doctor List
+* View Doctor Details
+* Update Doctor Information
+* Delete Doctor
 
-### 🧑‍🤝‍🧑 Manajemen Pasien
+### Patient Management
 
-* Menampilkan daftar pasien
-* Menambahkan pasien baru
-* Melihat detail pasien
-* Mengubah data pasien
-* Menghapus pasien
+* Create Patient
+* View Patient List
+* View Patient Details
+* Update Patient Information
+* Delete Patient
 
-### 📋 Medical Record
+### Medical Record Management
 
-* Menampilkan seluruh rekam medis
-* Menambahkan rekam medis baru
-* Melihat detail rekam medis
-* Mengubah data rekam medis
-* Menghapus rekam medis
+* Create Medical Record
+* View Medical Records
+* View Medical Record Details
+* Update Medical Record
+* Delete Medical Record
 
-### 💊 Prescription
+### Prescription Management
 
-* Menampilkan seluruh resep obat
-* Menambahkan resep baru
-* Melihat detail resep
-* Mengubah data resep
-* Menghapus resep
+* Create Prescription
+* View Prescriptions
+* View Prescription Details
+* Update Prescription
+* Delete Prescription
 
 ---
 
@@ -59,93 +59,88 @@ REST API Rumah Sakit Online adalah backend berbasis Laravel yang menyediakan lay
 * Laravel 11
 * MySQL
 * Laravel Sanctum
-* RESTful API
+* RESTful API Architecture
 
 ---
 
-## 📁 Struktur Modul
+## 📂 API Endpoints
 
 ### Authentication
 
-| Method | Endpoint      | Description   |
-| ------ | ------------- | ------------- |
-| POST   | /api/register | Register user |
-| POST   | /api/login    | Login user    |
-| POST   | /api/logout   | Logout user   |
+| Method | Endpoint        | Description               |
+| ------ | --------------- | ------------------------- |
+| POST   | `/api/register` | Register a new user       |
+| POST   | `/api/login`    | Authenticate user         |
+| POST   | `/api/logout`   | Logout authenticated user |
 
 ### Admin
 
-| Method | Endpoint        |
-| ------ | --------------- |
-| GET    | /api/admin      |
-| POST   | /api/admin      |
-| GET    | /api/admin/{id} |
-| PUT    | /api/admin/{id} |
-| DELETE | /api/admin/{id} |
-
-### Doctor
-
-| Method | Endpoint          |
-| ------ | ----------------- |
-| GET    | /api/doctors      |
-| POST   | /api/doctors      |
-| GET    | /api/doctors/{id} |
-| PUT    | /api/doctors/{id} |
-| DELETE | /api/doctors/{id} |
-
-### Patient
-
 | Method | Endpoint           |
 | ------ | ------------------ |
-| GET    | /api/patients      |
-| POST   | /api/patients      |
-| GET    | /api/patients/{id} |
-| PUT    | /api/patients/{id} |
-| DELETE | /api/patients/{id} |
+| GET    | `/api/admins`      |
+| POST   | `/api/admins`      |
+| GET    | `/api/admins/{id}` |
+| PUT    | `/api/admins/{id}` |
+| DELETE | `/api/admins/{id}` |
 
-### Medical Record
+### Doctors
 
-| Method | Endpoint                 |
-| ------ | ------------------------ |
-| GET    | /api/medical-record      |
-| POST   | /api/medical-record      |
-| GET    | /api/medical-record/{id} |
-| PUT    | /api/medical-record/{id} |
-| DELETE | /api/medical-record/{id} |
+| Method | Endpoint            |
+| ------ | ------------------- |
+| GET    | `/api/doctors`      |
+| POST   | `/api/doctors`      |
+| GET    | `/api/doctors/{id}` |
+| PUT    | `/api/doctors/{id}` |
+| DELETE | `/api/doctors/{id}` |
 
-### Prescription
+### Patients
 
-| Method | Endpoint                |
-| ------ | ----------------------- |
-| GET    | /api/prescriptions      |
-| POST   | /api/prescriptions      |
-| GET    | /api/prescriptions/{id} |
-| PUT    | /api/prescriptions/{id} |
-| DELETE | /api/prescriptions/{id} |
+| Method | Endpoint             |
+| ------ | -------------------- |
+| GET    | `/api/patients`      |
+| POST   | `/api/patients`      |
+| GET    | `/api/patients/{id}` |
+| PUT    | `/api/patients/{id}` |
+| DELETE | `/api/patients/{id}` |
+
+### Medical Records
+
+| Method | Endpoint                    |
+| ------ | --------------------------- |
+| GET    | `/api/medical-records`      |
+| POST   | `/api/medical-records`      |
+| GET    | `/api/medical-records/{id}` |
+| PUT    | `/api/medical-records/{id}` |
+| DELETE | `/api/medical-records/{id}` |
+
+### Prescriptions
+
+| Method | Endpoint                  |
+| ------ | ------------------------- |
+| GET    | `/api/prescriptions`      |
+| POST   | `/api/prescriptions`      |
+| GET    | `/api/prescriptions/{id}` |
+| PUT    | `/api/prescriptions/{id}` |
+| DELETE | `/api/prescriptions/{id}` |
 
 ---
 
 ## ⚙️ Installation
 
-Clone repository:
+### Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/Rest-Api-e-rumahsakit.git
-```
-
-Masuk ke folder project:
-
-```bash
 cd Rest-Api-e-rumahsakit
 ```
 
-Install dependency:
+### Install Dependencies
 
 ```bash
 composer install
 ```
 
-Copy environment:
+### Configure Environment
 
 ```bash
 cp .env.example .env
@@ -157,21 +152,21 @@ Generate application key:
 php artisan key:generate
 ```
 
-Konfigurasi database pada file `.env`.
+Configure your database credentials in the `.env` file.
 
-Jalankan migrasi database:
+### Run Database Migrations
 
 ```bash
 php artisan migrate
 ```
 
-Jalankan server:
+### Start Development Server
 
 ```bash
 php artisan serve
 ```
 
-Server akan berjalan pada:
+The API will be available at:
 
 ```text
 http://127.0.0.1:8000
@@ -179,13 +174,31 @@ http://127.0.0.1:8000
 
 ---
 
-## 📖 API Testing
+## 🔒 Authentication
 
-API dapat diuji menggunakan:
+This API uses Laravel Sanctum for authentication.
+
+After logging in, include the access token in your request headers:
+
+```http
+Authorization: Bearer YOUR_ACCESS_TOKEN
+```
+
+---
+
+## 🧪 API Testing
+
+You can test the API using:
 
 * Postman
 * Insomnia
-* Thunder Client (VS Code)
+* Thunder Client
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
 
 ---
 
@@ -193,8 +206,4 @@ API dapat diuji menggunakan:
 
 Muhammad Syafi'i
 
----
-
-## 📜 License
-
-This project is licensed under the MIT License.
+Backend Developer | Laravel Enthusiast
