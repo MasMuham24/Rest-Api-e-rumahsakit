@@ -1,209 +1,167 @@
-# 🏥 Online Hospital REST API
+# 🏥 e-RumahSakit: Fullstack Hospital Management System
 
-A RESTful API built with Laravel for managing hospital operations digitally. This project provides secure authentication and complete CRUD functionality for administrators, doctors, patients, medical records, and prescriptions.
+`e-RumahSakit` adalah aplikasi manajemen operasional rumah sakit berbasis web yang lengkap (fullstack). Proyek ini menggunakan **Laravel 11** sebagai RESTful API (backend) dan **React + Vite + Tailwind CSS** (frontend) untuk antarmuka pengguna yang modern dan interaktif.
 
-## 🚀 Features
+Sistem ini menyediakan otentikasi aman dan fungsi CRUD lengkap untuk mengelola data administrator, dokter, pasien, rekam medis, dan resep obat.
 
-### Authentication
+---
 
-* User Registration
-* User Login
-* User Logout
-* Token-Based Authentication
+## 📂 Struktur Proyek
 
-### Admin Management
-
-* Create Admin
-* View Admin List
-* View Admin Details
-* Update Admin Information
-* Delete Admin
-
-### Doctor Management
-
-* Create Doctor
-* View Doctor List
-* View Doctor Details
-* Update Doctor Information
-* Delete Doctor
-
-### Patient Management
-
-* Create Patient
-* View Patient List
-* View Patient Details
-* Update Patient Information
-* Delete Patient
-
-### Medical Record Management
-
-* Create Medical Record
-* View Medical Records
-* View Medical Record Details
-* Update Medical Record
-* Delete Medical Record
-
-### Prescription Management
-
-* Create Prescription
-* View Prescriptions
-* View Prescription Details
-* Update Prescription
-* Delete Prescription
+Proyek ini dibagi menjadi dua bagian utama:
+*   `backend/` - RESTful API yang dibangun menggunakan Laravel 11.
+*   `frontend/` - Aplikasi Client Side (Single Page Application) menggunakan React, Vite, Tailwind CSS, React Router, TanStack Query, dan Zustand.
 
 ---
 
 ## 🛠️ Tech Stack
 
-* PHP 8+
-* Laravel 11
-* MySQL
-* Laravel Sanctum
-* RESTful API Architecture
+### Backend
+*   **Framework:** Laravel 11
+*   **Language:** PHP 8+
+*   **Database:** MySQL / MariaDB
+*   **Authentication:** Laravel Sanctum (Token-Based)
+*   **Architecture:** RESTful API
+
+### Frontend
+*   **Bundler & Dev Server:** Vite
+*   **Library:** React 19
+*   **Styling:** Tailwind CSS v4
+*   **Routing:** React Router v7
+*   **State Management:** Zustand v5
+*   **Data Fetching:** TanStack React Query v5
+*   **HTTP Client:** Axios
 
 ---
 
-## 📂 API Endpoints
+## 🚀 Fitur Utama
 
-### Authentication
+### 🔐 Otentikasi & Otorisasi
+*   Registrasi Pengguna baru
+*   Login & Logout Pengguna
+*   Otentikasi berbasis Token (Laravel Sanctum)
 
-| Method | Endpoint        | Description               |
-| ------ | --------------- | ------------------------- |
-| POST   | `/api/register` | Register a new user       |
-| POST   | `/api/login`    | Authenticate user         |
-| POST   | `/api/logout`   | Logout authenticated user |
+### 👤 Manajemen Admin
+*   Tambah, Lihat, Perbarui, dan Hapus (CRUD) Administrator
 
-### Admin
+### 🥼 Manajemen Dokter
+*   Tambah, Lihat, Perbarui, dan Hapus (CRUD) Dokter
 
-| Method | Endpoint           |
-| ------ | ------------------ |
-| GET    | `/api/admins`      |
-| POST   | `/api/admins`      |
-| GET    | `/api/admins/{id}` |
-| PUT    | `/api/admins/{id}` |
-| DELETE | `/api/admins/{id}` |
+### 👥 Manajemen Pasien
+*   Tambah, Lihat, Perbarui, dan Hapus (CRUD) Pasien
 
-### Doctors
+### 📝 Manajemen Rekam Medis (Medical Records)
+*   Pencatatan rekam medis pasien oleh dokter/admin
+*   Melihat riwayat rekam medis lengkap
 
-| Method | Endpoint            |
-| ------ | ------------------- |
-| GET    | `/api/doctors`      |
-| POST   | `/api/doctors`      |
-| GET    | `/api/doctors/{id}` |
-| PUT    | `/api/doctors/{id}` |
-| DELETE | `/api/doctors/{id}` |
-
-### Patients
-
-| Method | Endpoint             |
-| ------ | -------------------- |
-| GET    | `/api/patients`      |
-| POST   | `/api/patients`      |
-| GET    | `/api/patients/{id}` |
-| PUT    | `/api/patients/{id}` |
-| DELETE | `/api/patients/{id}` |
-
-### Medical Records
-
-| Method | Endpoint                    |
-| ------ | --------------------------- |
-| GET    | `/api/medical-records`      |
-| POST   | `/api/medical-records`      |
-| GET    | `/api/medical-records/{id}` |
-| PUT    | `/api/medical-records/{id}` |
-| DELETE | `/api/medical-records/{id}` |
-
-### Prescriptions
-
-| Method | Endpoint                  |
-| ------ | ------------------------- |
-| GET    | `/api/prescriptions`      |
-| POST   | `/api/prescriptions`      |
-| GET    | `/api/prescriptions/{id}` |
-| PUT    | `/api/prescriptions/{id}` |
-| DELETE | `/api/prescriptions/{id}` |
+### 💊 Manajemen Resep Obat (Prescriptions)
+*   Pembuatan resep obat yang terhubung langsung dengan rekam medis
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Petunjuk Instalasi & Menjalankan Aplikasi
 
-### Clone the Repository
+### 1. Prasyarat (Prerequisites)
+Pastikan Anda sudah menginstal perangkat lunak berikut pada komputer Anda:
+*   PHP (versi 8.2 atau lebih baru)
+*   Composer
+*   Node.js (versi 18 atau lebih baru) dan npm
+*   MySQL atau XAMPP (untuk database)
 
+---
+
+### 2. Konfigurasi Backend (Laravel)
+
+Pindah ke direktori backend:
 ```bash
-git clone https://github.com/your-username/Rest-Api-e-rumahsakit.git
-cd Rest-Api-e-rumahsakit
+cd backend
 ```
 
-### Install Dependencies
-
+Instal dependensi PHP:
 ```bash
 composer install
 ```
 
-### Configure Environment
-
+Salin file konfigurasi environment:
 ```bash
 cp .env.example .env
 ```
 
 Generate application key:
-
 ```bash
 php artisan key:generate
 ```
 
-Configure your database credentials in the `.env` file.
+Konfigurasikan database Anda di file `.env`:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=e_rumahsakit
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-### Run Database Migrations
-
+Jalankan migrasi database:
 ```bash
 php artisan migrate
 ```
 
-### Start Development Server
-
+Jalankan server backend:
 ```bash
 php artisan serve
 ```
+Backend API akan berjalan secara default di `http://127.0.0.1:8000`.
 
-The API will be available at:
+---
 
-```text
-http://127.0.0.1:8000
+### 3. Konfigurasi Frontend (React)
+
+Pindah ke direktori frontend:
+```bash
+cd ../frontend
 ```
 
----
-
-## 🔒 Authentication
-
-This API uses Laravel Sanctum for authentication.
-
-After logging in, include the access token in your request headers:
-
-```http
-Authorization: Bearer YOUR_ACCESS_TOKEN
+Instal dependensi JavaScript:
+```bash
+npm install
 ```
 
----
-
-## 🧪 API Testing
-
-You can test the API using:
-
-* Postman
-* Insomnia
-* Thunder Client
+Jalankan server development frontend:
+```bash
+npm run dev
+```
+Aplikasi frontend akan berjalan secara default di `http://localhost:5173`.
 
 ---
 
-## 📄 License
+## 🔒 API Endpoints (Ringkasan)
 
-This project is licensed under the MIT License.
+Semua endpoint API backend diawali dengan `/api`.
+
+### Authentication
+*   `POST /api/register` - Pendaftaran pengguna baru
+*   `POST /api/login` - Login pengguna & generate token
+*   `POST /api/logout` - Logout pengguna & hapus token
+
+### Resource Management (CRUD)
+*   **Admins:** `GET|POST|PUT|DELETE` ke `/api/admins` dan `/api/admins/{id}`
+*   **Doctors:** `GET|POST|PUT|DELETE` ke `/api/doctors` dan `/api/doctors/{id}`
+*   **Patients:** `GET|POST|PUT|DELETE` ke `/api/patients` dan `/api/patients/{id}`
+*   **Medical Records:** `GET|POST|PUT|DELETE` ke `/api/medical-records` dan `/api/medical-records/{id}`
+*   **Prescriptions:** `GET|POST|PUT|DELETE` ke `/api/prescriptions` dan `/api/prescriptions/{id}`
+
+*Catatan: Endpoint selain registrasi dan login memerlukan header `Authorization: Bearer <TOKEN>`.*
 
 ---
 
-## 👨‍💻 Author
+## 📄 Lisensi
 
-Muhammad Syafi'i
+Proyek ini dilisensikan di bawah Lisensi MIT.
 
-Backend Developer | Laravel Enthusiast
+---
+
+## 👨‍💻 Penulis
+
+**Muhammad Syafi'i**
+*   Backend & Frontend Developer | Laravel & React Enthusiast
