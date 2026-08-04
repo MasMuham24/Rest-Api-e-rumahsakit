@@ -1,98 +1,115 @@
-# 🏥 e-RumahSakit: Fullstack Hospital Management System
+# 🏥 e-Hospital: Fullstack Hospital Management System
 
-`e-RumahSakit` adalah aplikasi manajemen operasional rumah sakit berbasis web yang lengkap (fullstack). Proyek ini menggunakan **Laravel 11** sebagai RESTful API (backend) dan **React + Vite + Tailwind CSS** (frontend) untuk antarmuka pengguna yang modern dan interaktif.
+`e-Hospital` is a complete web-based Hospital Management System built as a fullstack application. This project uses **Laravel 11** as the RESTful API (backend) and **React + Vite + Tailwind CSS** (frontend) to deliver a modern, responsive, and interactive user experience.
 
-Sistem ini menyediakan otentikasi aman dan fungsi CRUD lengkap untuk mengelola data administrator, dokter, pasien, rekam medis, dan resep obat.
+The system provides secure authentication and complete CRUD functionality for managing administrators, doctors, patients, medical records, and prescriptions.
 
 ---
 
-## 📂 Struktur Proyek
+## 📂 Project Structure
 
-Proyek ini dibagi menjadi dua bagian utama:
-*   `backend/` - RESTful API yang dibangun menggunakan Laravel 11.
-*   `frontend/` - Aplikasi Client Side (Single Page Application) menggunakan React, Vite, Tailwind CSS, React Router, TanStack Query, dan Zustand.
+The project is divided into two main parts:
+
+- `backend/` - RESTful API built with Laravel 11.
+- `frontend/` - Single Page Application (SPA) built with React, Vite, Tailwind CSS, React Router, TanStack Query, and Zustand.
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Backend
-*   **Framework:** Laravel 11
-*   **Language:** PHP 8+
-*   **Database:** MySQL / MariaDB
-*   **Authentication:** Laravel Sanctum (Token-Based)
-*   **Architecture:** RESTful API
+
+- **Framework:** Laravel 11
+- **Language:** PHP 8+
+- **Database:** MySQL / MariaDB
+- **Authentication:** Laravel Sanctum (Token-Based)
+- **Architecture:** RESTful API
 
 ### Frontend
-*   **Bundler & Dev Server:** Vite
-*   **Library:** React 19
-*   **Styling:** Tailwind CSS v4
-*   **Routing:** React Router v7
-*   **State Management:** Zustand v5
-*   **Data Fetching:** TanStack React Query v5
-*   **HTTP Client:** Axios
+
+- **Bundler & Dev Server:** Vite
+- **Library:** React 19
+- **Styling:** Tailwind CSS v4
+- **Routing:** React Router v7
+- **State Management:** Zustand v5
+- **Data Fetching:** TanStack React Query v5
+- **HTTP Client:** Axios
 
 ---
 
-## 🚀 Fitur Utama
+## 🚀 Key Features
 
-### 🔐 Otentikasi & Otorisasi
-*   Registrasi Pengguna baru
-*   Login & Logout Pengguna
-*   Otentikasi berbasis Token (Laravel Sanctum)
+### 🔐 Authentication & Authorization
 
-### 👤 Manajemen Admin
-*   Tambah, Lihat, Perbarui, dan Hapus (CRUD) Administrator
+- User Registration
+- User Login & Logout
+- Token-Based Authentication using Laravel Sanctum
 
-### 🥼 Manajemen Dokter
-*   Tambah, Lihat, Perbarui, dan Hapus (CRUD) Dokter
+### 👤 Administrator Management
 
-### 👥 Manajemen Pasien
-*   Tambah, Lihat, Perbarui, dan Hapus (CRUD) Pasien
+- Create, Read, Update, and Delete (CRUD) administrators
 
-### 📝 Manajemen Rekam Medis (Medical Records)
-*   Pencatatan rekam medis pasien oleh dokter/admin
-*   Melihat riwayat rekam medis lengkap
+### 🥼 Doctor Management
 
-### 💊 Manajemen Resep Obat (Prescriptions)
-*   Pembuatan resep obat yang terhubung langsung dengan rekam medis
+- Create, Read, Update, and Delete (CRUD) doctors
 
----
+### 👥 Patient Management
 
-## ⚙️ Petunjuk Instalasi & Menjalankan Aplikasi
+- Create, Read, Update, and Delete (CRUD) patients
 
-### 1. Prasyarat (Prerequisites)
-Pastikan Anda sudah menginstal perangkat lunak berikut pada komputer Anda:
-*   PHP (versi 8.2 atau lebih baru)
-*   Composer
-*   Node.js (versi 18 atau lebih baru) dan npm
-*   MySQL atau XAMPP (untuk database)
+### 📝 Medical Records Management
+
+- Create medical records for patients by doctors or administrators
+- View complete patient medical history
+
+### 💊 Prescription Management
+
+- Create and manage prescriptions linked directly to medical records
 
 ---
 
-### 2. Konfigurasi Backend (Laravel)
+## ⚙️ Installation Guide
 
-Pindah ke direktori backend:
+### 1. Prerequisites
+
+Make sure the following software is installed on your computer:
+
+- PHP 8.2 or later
+- Composer
+- Node.js 18 or later
+- npm
+- MySQL or XAMPP
+
+---
+
+### 2. Backend Setup (Laravel)
+
+Navigate to the backend directory:
+
 ```bash
 cd backend
 ```
 
-Instal dependensi PHP:
+Install PHP dependencies:
+
 ```bash
 composer install
 ```
 
-Salin file konfigurasi environment:
+Copy the environment file:
+
 ```bash
 cp .env.example .env
 ```
 
-Generate application key:
+Generate the application key:
+
 ```bash
 php artisan key:generate
 ```
 
-Konfigurasikan database Anda di file `.env`:
+Configure your database in the `.env` file:
+
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -102,66 +119,129 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Jalankan migrasi database:
+Run database migrations:
+
 ```bash
 php artisan migrate
 ```
 
-Jalankan server backend:
+Start the Laravel development server:
+
 ```bash
 php artisan serve
 ```
-Backend API akan berjalan secara default di `http://127.0.0.1:8000`.
+
+The backend API will be available at:
+
+```
+http://127.0.0.1:8000
+```
 
 ---
 
-### 3. Konfigurasi Frontend (React)
+### 3. Frontend Setup (React)
 
-Pindah ke direktori frontend:
+Navigate to the frontend directory:
+
 ```bash
 cd ../frontend
 ```
 
-Instal dependensi JavaScript:
+Install JavaScript dependencies:
+
 ```bash
 npm install
 ```
 
-Jalankan server development frontend:
+Start the Vite development server:
+
 ```bash
 npm run dev
 ```
-Aplikasi frontend akan berjalan secara default di `http://localhost:5173`.
+
+The frontend application will be available at:
+
+```
+http://localhost:5173
+```
 
 ---
 
-## 🔒 API Endpoints (Ringkasan)
+## 🔒 API Endpoints (Overview)
 
-Semua endpoint API backend diawali dengan `/api`.
+All backend endpoints are prefixed with `/api`.
 
 ### Authentication
-*   `POST /api/register` - Pendaftaran pengguna baru
-*   `POST /api/login` - Login pengguna & generate token
-*   `POST /api/logout` - Logout pengguna & hapus token
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/api/register` | Register a new user |
+| POST | `/api/login` | Authenticate user and generate access token |
+| POST | `/api/logout` | Logout user and revoke access token |
 
 ### Resource Management (CRUD)
-*   **Admins:** `GET|POST|PUT|DELETE` ke `/api/admins` dan `/api/admins/{id}`
-*   **Doctors:** `GET|POST|PUT|DELETE` ke `/api/doctors` dan `/api/doctors/{id}`
-*   **Patients:** `GET|POST|PUT|DELETE` ke `/api/patients` dan `/api/patients/{id}`
-*   **Medical Records:** `GET|POST|PUT|DELETE` ke `/api/medical-records` dan `/api/medical-records/{id}`
-*   **Prescriptions:** `GET|POST|PUT|DELETE` ke `/api/prescriptions` dan `/api/prescriptions/{id}`
 
-*Catatan: Endpoint selain registrasi dan login memerlukan header `Authorization: Bearer <TOKEN>`.*
+#### Administrators
+
+```
+GET    /api/admins
+POST   /api/admins
+PUT    /api/admins/{id}
+DELETE /api/admins/{id}
+```
+
+#### Doctors
+
+```
+GET    /api/doctors
+POST   /api/doctors
+PUT    /api/doctors/{id}
+DELETE /api/doctors/{id}
+```
+
+#### Patients
+
+```
+GET    /api/patients
+POST   /api/patients
+PUT    /api/patients/{id}
+DELETE /api/patients/{id}
+```
+
+#### Medical Records
+
+```
+GET    /api/medical-records
+POST   /api/medical-records
+PUT    /api/medical-records/{id}
+DELETE /api/medical-records/{id}
+```
+
+#### Prescriptions
+
+```
+GET    /api/prescriptions
+POST   /api/prescriptions
+PUT    /api/prescriptions/{id}
+DELETE /api/prescriptions/{id}
+```
+
+> **Note:** All endpoints except **Register** and **Login** require an authentication token in the request header:
+
+```http
+Authorization: Bearer <TOKEN>
+```
 
 ---
 
-## 📄 Lisensi
+## 📄 License
 
-Proyek ini dilisensikan di bawah Lisensi MIT.
+This project is licensed under the **MIT License**.
 
 ---
 
-## 👨‍💻 Penulis
+## 👨‍💻 Author
 
 **Muhammad Syafi'i**
-*   Backend & Frontend Developer | Laravel & React Enthusiast
+
+Backend & Frontend Developer • Laravel & React Enthusiast
