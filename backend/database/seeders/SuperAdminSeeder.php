@@ -6,6 +6,7 @@ use App\Models\User;
 use Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash as FacadesHash;
 
 class SuperAdminSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class SuperAdminSeeder extends Seeder
             'email' => 'Superadmin@gmail.com'
         ], [
             'name' => 'Super Admin',
-            'password' => Hash::make('admin@1234'),
+            'password' => FacadesHash::make('admin@1234'),
             'role' => 'superadmin'
         ]);
     }
