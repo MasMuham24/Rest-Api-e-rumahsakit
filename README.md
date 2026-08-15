@@ -1,105 +1,250 @@
-# 🏥 e-Hospital: Fullstack Hospital Management System
+# e-RumahSakit REST API
 
-`e-Hospital` is a complete web-based Hospital Management System built as a fullstack application. This project uses **Laravel 11** as the RESTful API (backend) and **React + Vite + Tailwind CSS** (frontend) to deliver a modern, responsive, and interactive user experience.
+A backend RESTful API for hospital management systems, built with **Laravel**. The application provides structured API endpoints for managing authentication, doctors, patients, appointments, medical records, and prescriptions.
 
-The system provides secure authentication and complete CRUD functionality for managing administrators, doctors, patients, medical records, and prescriptions.
-
----
-
-## 📂 Project Structure
-
-The project is divided into two main parts:
-
-- `backend/` - RESTful API built with Laravel 11.
-- `frontend/` - Single Page Application (SPA) built with React, Vite, Tailwind CSS, React Router, TanStack Query, and Zustand.
+This project is developed as a **backend-only service**, independent of any frontend framework, making the API consumable by web applications, mobile applications, or other client services.
 
 ---
 
-## 🛠️ Tech Stack
+## Overview
 
-### Backend
+**e-RumahSakit REST API** provides a centralized backend service for managing hospital-related operations through RESTful HTTP endpoints.
 
-- **Framework:** Laravel 11
-- **Language:** PHP 8+
-- **Database:** MySQL / MariaDB
-- **Authentication:** Laravel Sanctum (Token-Based)
-- **Architecture:** RESTful API
+The system is designed around standard backend development practices, including:
 
-### Frontend
+* RESTful API architecture
+* Token-based authentication
+* Request validation
+* Relational database design
+* Eloquent ORM
+* Protected API routes
+* Structured JSON responses
+* Separation of concerns between routing, controllers, models, and validation
 
-- **Bundler & Dev Server:** Vite
-- **Library:** React 19
-- **Styling:** Tailwind CSS v4
-- **Routing:** React Router v7
-- **State Management:** Zustand v5
-- **Data Fetching:** TanStack React Query v5
-- **HTTP Client:** Axios
+The API communicates using **JSON** and can be consumed by any HTTP-compatible client.
 
 ---
 
-## 🚀 Key Features
+## Features
 
-### 🔐 Authentication & Authorization
+### Authentication
 
-- User Registration
-- User Login & Logout
-- Token-Based Authentication using Laravel Sanctum
+* User registration
+* User login
+* User logout
+* Token-based authentication using Laravel Sanctum
+* Protected API routes
+* Authentication middleware
+* Password hashing
 
-### 👤 Administrator Management
+### Doctor Management
 
-- Create, Read, Update, and Delete (CRUD) administrators
+* Create doctor records
+* Retrieve doctor collections
+* Retrieve doctor details
+* Update doctor records
+* Delete doctor records
 
-### 🥼 Doctor Management
+### Patient Management
 
-- Create, Read, Update, and Delete (CRUD) doctors
+* Create patient records
+* Retrieve patient collections
+* Retrieve patient details
+* Update patient records
+* Delete patient records
 
-### 👥 Patient Management
+### Appointment Management
 
-- Create, Read, Update, and Delete (CRUD) patients
+* Create appointments
+* Retrieve appointments
+* Retrieve appointment details
+* Update appointments
+* Update appointment status
+* Delete appointments
 
-### 📝 Medical Records Management
+### Medical Record Management
 
-- Create medical records for patients by doctors or administrators
-- View complete patient medical history
+* Create medical records
+* Retrieve medical records
+* Retrieve medical record details
+* Update medical records
+* Delete medical records
+* Patient and doctor relationship management
 
-### 💊 Prescription Management
+### Prescription Management
 
-- Create and manage prescriptions linked directly to medical records
+* Create prescriptions
+* Retrieve prescriptions
+* Retrieve prescription details
+* Update prescriptions
+* Delete prescriptions
+* Medical record relationship management
 
 ---
 
-## ⚙️ Installation Guide
+## Technology Stack
 
-### 1. Prerequisites
-
-Make sure the following software is installed on your computer:
-
-- PHP 8.2 or later
-- Composer
-- Node.js 18 or later
-- npm
-- MySQL or XAMPP
+| Technology      | Purpose                      |
+| --------------- | ---------------------------- |
+| PHP             | Backend programming language |
+| Laravel         | REST API framework           |
+| Laravel Sanctum | API authentication           |
+| MySQL           | Relational database          |
+| Eloquent ORM    | Database abstraction         |
+| Composer        | PHP dependency management    |
+| Postman         | API testing                  |
 
 ---
 
-### 2. Backend Setup (Laravel)
+## Architecture
 
-Navigate to the backend directory:
+The application follows a layered REST API architecture:
 
-```bash
-cd backend
+```text
+Client
+  │
+  │ HTTP Request
+  ▼
+┌──────────────────────────────┐
+│          API Routes          │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│         Middleware           │
+│ Authentication / Validation  │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│         Controllers          │
+│     Business Operations      │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│       Models / Eloquent      │
+│      Database Relations      │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│            MySQL             │
+└──────────────────────────────┘
+               │
+               ▼
+        JSON Response
 ```
 
-Install PHP dependencies:
+The backend does not depend on a specific frontend technology.
+
+It can be integrated with:
+
+* React
+* Vue
+* Angular
+* Next.js
+* Mobile applications
+* Desktop applications
+* Third-party services
+
+---
+
+## Project Structure
+
+```text
+e-rumahsakit/
+│
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   ├── Middleware/
+│   │   └── Requests/
+│   │
+│   ├── Models/
+│   └── Providers/
+│
+├── bootstrap/
+│
+├── config/
+│
+├── database/
+│   ├── factories/
+│   ├── migrations/
+│   └── seeders/
+│
+├── public/
+│
+├── resources/
+│
+├── routes/
+│   ├── api.php
+│   ├── console.php
+│   └── web.php
+│
+├── storage/
+│
+├── tests/
+│
+├── .env.example
+├── artisan
+├── composer.json
+├── composer.lock
+└── README.md
+```
+
+---
+
+## Requirements
+
+Before installing the application, ensure the following dependencies are available:
+
+* PHP 8.2 or higher
+* Composer
+* MySQL 8.0 or higher
+* Git
+
+Required PHP extensions should include:
+
+* OpenSSL
+* PDO
+* Mbstring
+* Tokenizer
+* XML
+* Ctype
+* JSON
+* BCMath
+
+---
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/MasMuham24/Rest-Api-e-rumahsakit.git
+
+cd Rest-Api-e-rumahsakit
+```
+
+### 2. Install Dependencies
 
 ```bash
 composer install
 ```
 
-Copy the environment file:
+### 3. Configure Environment
+
+Copy the example environment configuration:
 
 ```bash
 cp .env.example .env
+```
+
+For Windows:
+
+```bash
+copy .env.example .env
 ```
 
 Generate the application key:
@@ -108,7 +253,17 @@ Generate the application key:
 php artisan key:generate
 ```
 
-Configure your database in the `.env` file:
+---
+
+## Database Configuration
+
+Create a MySQL database:
+
+```text
+e_rumahsakit
+```
+
+Configure the database connection inside `.env`:
 
 ```env
 DB_CONNECTION=mysql
@@ -119,129 +274,417 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Run database migrations:
+Update the credentials according to your environment.
+
+---
+
+## Database Migration
+
+Run the migrations:
 
 ```bash
 php artisan migrate
 ```
 
-Start the Laravel development server:
+If seeders are available:
+
+```bash
+php artisan db:seed
+```
+
+Or:
+
+```bash
+php artisan migrate --seed
+```
+
+For a complete database reset during development:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+> `migrate:fresh` removes all existing tables and data. Use it only in development environments.
+
+---
+
+## Authentication
+
+The API uses **Laravel Sanctum** for token-based authentication.
+
+After a successful login, the API returns an access token that must be included when accessing protected resources.
+
+### Authorization Header
+
+```http
+Authorization: Bearer YOUR_ACCESS_TOKEN
+```
+
+Example:
+
+```http
+GET /api/appointments
+Accept: application/json
+Authorization: Bearer 1|xxxxxxxxxxxxxxxx
+```
+
+Protected routes are handled through Laravel authentication middleware.
+
+---
+
+# API Reference
+
+Base URL:
+
+```text
+http://127.0.0.1:8000/api
+```
+
+---
+
+## Authentication
+
+| Method | Endpoint    | Auth | Description                             |
+| ------ | ----------- | ---: | --------------------------------------- |
+| POST   | `/register` |   No | Register a new user                     |
+| POST   | `/login`    |   No | Authenticate a user                     |
+| POST   | `/logout`   |  Yes | Revoke the current authentication token |
+
+---
+
+## Doctors
+
+| Method | Endpoint        | Auth | Description          |
+| ------ | --------------- | ---: | -------------------- |
+| GET    | `/doctors`      |  Yes | Retrieve all doctors |
+| POST   | `/doctors`      |  Yes | Create a doctor      |
+| GET    | `/doctors/{id}` |  Yes | Retrieve a doctor    |
+| PUT    | `/doctors/{id}` |  Yes | Update a doctor      |
+| DELETE | `/doctors/{id}` |  Yes | Delete a doctor      |
+
+---
+
+## Patients
+
+| Method | Endpoint         | Auth | Description           |
+| ------ | ---------------- | ---: | --------------------- |
+| GET    | `/patients`      |  Yes | Retrieve all patients |
+| POST   | `/patients`      |  Yes | Create a patient      |
+| GET    | `/patients/{id}` |  Yes | Retrieve a patient    |
+| PUT    | `/patients/{id}` |  Yes | Update a patient      |
+| DELETE | `/patients/{id}` |  Yes | Delete a patient      |
+
+---
+
+## Appointments
+
+| Method | Endpoint             | Auth | Description             |
+| ------ | -------------------- | ---: | ----------------------- |
+| GET    | `/appointments`      |  Yes | Retrieve appointments   |
+| POST   | `/appointments`      |  Yes | Create an appointment   |
+| GET    | `/appointments/{id}` |  Yes | Retrieve an appointment |
+| PUT    | `/appointments/{id}` |  Yes | Update an appointment   |
+| DELETE | `/appointments/{id}` |  Yes | Delete an appointment   |
+
+---
+
+## Medical Records
+
+| Method | Endpoint                | Auth | Description               |
+| ------ | ----------------------- | ---: | ------------------------- |
+| GET    | `/medical-records`      |  Yes | Retrieve medical records  |
+| POST   | `/medical-records`      |  Yes | Create a medical record   |
+| GET    | `/medical-records/{id}` |  Yes | Retrieve a medical record |
+| PUT    | `/medical-records/{id}` |  Yes | Update a medical record   |
+| DELETE | `/medical-records/{id}` |  Yes | Delete a medical record   |
+
+---
+
+## Prescriptions
+
+| Method | Endpoint              | Auth | Description             |
+| ------ | --------------------- | ---: | ----------------------- |
+| GET    | `/prescriptions`      |  Yes | Retrieve prescriptions  |
+| POST   | `/prescriptions`      |  Yes | Create a prescription   |
+| GET    | `/prescriptions/{id}` |  Yes | Retrieve a prescription |
+| PUT    | `/prescriptions/{id}` |  Yes | Update a prescription   |
+| DELETE | `/prescriptions/{id}` |  Yes | Delete a prescription   |
+
+---
+
+# API Response Format
+
+Successful responses follow a consistent JSON structure.
+
+Example:
+
+```json
+{
+    "success": true,
+    "message": "Data retrieved successfully",
+    "data": []
+}
+```
+
+### Error Response
+
+Validation errors are returned in a structured format:
+
+```json
+{
+    "success": false,
+    "message": "Validation failed",
+    "errors": {
+        "email": [
+            "The email field is required."
+        ]
+    }
+}
+```
+
+---
+
+# Example Authentication Flow
+
+The typical authentication flow is:
+
+```text
+POST /register
+       │
+       ▼
+POST /login
+       │
+       ▼
+Receive Access Token
+       │
+       ▼
+Authorization: Bearer TOKEN
+       │
+       ▼
+Access Protected Resources
+```
+
+Example login request:
+
+```http
+POST /api/login
+Content-Type: application/json
+Accept: application/json
+```
+
+```json
+{
+    "email": "admin@example.com",
+    "password": "password"
+}
+```
+
+---
+
+# Database Relationships
+
+The system uses relational database modeling through Laravel Eloquent.
+
+The main entities are connected conceptually as follows:
+
+```text
+                 ┌──────────────┐
+                 │    User      │
+                 └──────┬───────┘
+                        │
+              ┌─────────┴─────────┐
+              │                   │
+              ▼                   ▼
+        ┌──────────┐        ┌──────────┐
+        │  Doctor  │        │ Patient  │
+        └────┬─────┘        └────┬─────┘
+             │                   │
+             └────────┬──────────┘
+                      │
+                      ▼
+              ┌──────────────┐
+              │ Appointment  │
+              └──────┬───────┘
+                     │
+                     ▼
+             ┌─────────────────┐
+             │ Medical Record  │
+             └────────┬────────┘
+                      │
+                      ▼
+              ┌──────────────┐
+              │ Prescription │
+              └──────────────┘
+```
+
+Relationships are implemented using Laravel Eloquent relationship methods.
+
+---
+
+# API Testing
+
+The API can be tested using:
+
+* Postman
+* Insomnia
+* Bruno
+* Hoppscotch
+* cURL
+
+Recommended workflow:
+
+```text
+1. Register
+      ↓
+2. Login
+      ↓
+3. Copy Access Token
+      ↓
+4. Set Bearer Token
+      ↓
+5. Test Protected Endpoints
+      ↓
+6. Perform CRUD Operations
+```
+
+---
+
+# Development Commands
+
+### Start Development Server
 
 ```bash
 php artisan serve
 ```
 
-The backend API will be available at:
-
-```
-http://127.0.0.1:8000
-```
-
----
-
-### 3. Frontend Setup (React)
-
-Navigate to the frontend directory:
+### List API Routes
 
 ```bash
-cd ../frontend
+php artisan route:list --path=api
 ```
 
-Install JavaScript dependencies:
+### Clear Application Cache
 
 ```bash
-npm install
+php artisan optimize:clear
 ```
 
-Start the Vite development server:
+### Run Migrations
 
 ```bash
-npm run dev
+php artisan migrate
 ```
 
-The frontend application will be available at:
+### Run Seeders
 
-```
-http://localhost:5173
-```
-
----
-
-## 🔒 API Endpoints (Overview)
-
-All backend endpoints are prefixed with `/api`.
-
-### Authentication
-
-| Method | Endpoint | Description |
-|---------|----------|-------------|
-| POST | `/api/register` | Register a new user |
-| POST | `/api/login` | Authenticate user and generate access token |
-| POST | `/api/logout` | Logout user and revoke access token |
-
-### Resource Management (CRUD)
-
-#### Administrators
-
-```
-GET    /api/admins
-POST   /api/admins
-PUT    /api/admins/{id}
-DELETE /api/admins/{id}
+```bash
+php artisan db:seed
 ```
 
-#### Doctors
+### Run Tests
 
-```
-GET    /api/doctors
-POST   /api/doctors
-PUT    /api/doctors/{id}
-DELETE /api/doctors/{id}
-```
-
-#### Patients
-
-```
-GET    /api/patients
-POST   /api/patients
-PUT    /api/patients/{id}
-DELETE /api/patients/{id}
-```
-
-#### Medical Records
-
-```
-GET    /api/medical-records
-POST   /api/medical-records
-PUT    /api/medical-records/{id}
-DELETE /api/medical-records/{id}
-```
-
-#### Prescriptions
-
-```
-GET    /api/prescriptions
-POST   /api/prescriptions
-PUT    /api/prescriptions/{id}
-DELETE /api/prescriptions/{id}
-```
-
-> **Note:** All endpoints except **Register** and **Login** require an authentication token in the request header:
-
-```http
-Authorization: Bearer <TOKEN>
+```bash
+php artisan test
 ```
 
 ---
 
-## 📄 License
+# Security Considerations
 
-This project is licensed under the **MIT License**.
+The application follows several backend security practices:
+
+* Authentication through Laravel Sanctum
+* Protected API endpoints
+* Password hashing
+* Request validation
+* Authentication middleware
+* Environment-based configuration
+* Database relationship constraints
+
+Sensitive configuration must never be committed to the repository.
+
+The `.env` file should remain excluded through `.gitignore`.
 
 ---
 
-## 👨‍💻 Author
+# Future Improvements
 
-**Muhammad Syafi'i**
+Potential improvements for future releases:
 
-Backend & Frontend Developer • Laravel & React Enthusiast
+* [ ] OpenAPI / Swagger API documentation
+* [ ] API versioning
+* [ ] Pagination
+* [ ] Advanced filtering and searching
+* [ ] Role and permission management
+* [ ] Rate limiting
+* [ ] Automated feature tests
+* [ ] Unit testing
+* [ ] API request logging
+* [ ] Docker support
+* [ ] CI/CD pipeline
+* [ ] Hospital queue management
+* [ ] Doctor scheduling
+* [ ] Billing management
+* [ ] Notification service
+
+---
+
+# Project Objectives
+
+This project was developed to demonstrate practical backend engineering capabilities, particularly in:
+
+* RESTful API development
+* Laravel application architecture
+* Authentication and authorization
+* Database relationship modeling
+* CRUD implementation
+* Request validation
+* Eloquent ORM
+* API response design
+* Backend security practices
+* API testing
+
+---
+
+# License
+
+This project is licensed under the **Apache License 2.0**.
+
+See the [`LICENSE`](./LICENSE) file for details.
+
+---
+
+# Author
+
+**MasMuham24**
+
+Backend / Fullstack Developer
+
+### Core Technologies
+
+```text
+PHP
+Laravel
+REST API
+MySQL
+Laravel Sanctum
+Eloquent ORM
+Git
+GitHub
+```
+
+---
+
+# Repository
+
+GitHub:
+
+https://github.com/MasMuham24/Rest-Api-e-rumahsakit
+
+---
+
+<p align="center">
+  <strong>e-RumahSakit REST API</strong>
+  <br>
+  Backend service built with Laravel
+</p>
