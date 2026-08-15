@@ -1,84 +1,32 @@
 # e-RumahSakit REST API
 
-A backend RESTful API for hospital management systems, built with **Laravel**. The application provides structured API endpoints for managing authentication, doctors, patients, appointments, medical records, and prescriptions.
+A RESTful API for hospital management systems, built with **Laravel 11**.
 
-This project is developed as a **backend-only service**, independent of any frontend framework, making the API consumable by web applications, mobile applications, or other client services.
+e-RumahSakit provides a backend service for managing hospital operations, including authentication, user accounts, doctors, patients, appointments, medical records, and prescriptions.
+
+The application is designed as a **backend-only REST API** and is independent of any frontend framework. It can be consumed by web applications, mobile applications, or other services through HTTP requests and JSON responses.
 
 ---
 
 ## Overview
 
-**e-RumahSakit REST API** provides a centralized backend service for managing hospital-related operations through RESTful HTTP endpoints.
+The system provides a structured backend for managing healthcare-related data while implementing authentication and role-based authorization.
 
-The system is designed around standard backend development practices, including:
+The API follows RESTful principles and uses **Laravel Sanctum** for token-based authentication.
 
-* RESTful API architecture
-* Token-based authentication
+### Core Capabilities
+
+* Authentication and authorization
+* Role-based access control
+* Account management
+* Doctor management
+* Patient management
+* Appointment management
+* Medical record management
+* Prescription management
+* Relational database management
 * Request validation
-* Relational database design
-* Eloquent ORM
-* Protected API routes
-* Structured JSON responses
-* Separation of concerns between routing, controllers, models, and validation
-
-The API communicates using **JSON** and can be consumed by any HTTP-compatible client.
-
----
-
-## Features
-
-### Authentication
-
-* User registration
-* User login
-* User logout
-* Token-based authentication using Laravel Sanctum
-* Protected API routes
-* Authentication middleware
-* Password hashing
-
-### Doctor Management
-
-* Create doctor records
-* Retrieve doctor collections
-* Retrieve doctor details
-* Update doctor records
-* Delete doctor records
-
-### Patient Management
-
-* Create patient records
-* Retrieve patient collections
-* Retrieve patient details
-* Update patient records
-* Delete patient records
-
-### Appointment Management
-
-* Create appointments
-* Retrieve appointments
-* Retrieve appointment details
-* Update appointments
-* Update appointment status
-* Delete appointments
-
-### Medical Record Management
-
-* Create medical records
-* Retrieve medical records
-* Retrieve medical record details
-* Update medical records
-* Delete medical records
-* Patient and doctor relationship management
-
-### Prescription Management
-
-* Create prescriptions
-* Retrieve prescriptions
-* Retrieve prescription details
-* Update prescriptions
-* Delete prescriptions
-* Medical record relationship management
+* Protected API endpoints
 
 ---
 
@@ -86,125 +34,219 @@ The API communicates using **JSON** and can be consumed by any HTTP-compatible c
 
 | Technology      | Purpose                      |
 | --------------- | ---------------------------- |
-| PHP             | Backend programming language |
-| Laravel         | REST API framework           |
-| Laravel Sanctum | API authentication           |
+| PHP 8.2+        | Backend programming language |
+| Laravel 11      | Backend framework            |
+| Laravel Sanctum | Token-based authentication   |
 | MySQL           | Relational database          |
-| Eloquent ORM    | Database abstraction         |
-| Composer        | PHP dependency management    |
+| Eloquent ORM    | Database interaction         |
+| Composer        | Dependency management        |
+| REST API        | Application architecture     |
+| JSON            | API response format          |
 | Postman         | API testing                  |
 
 ---
 
-## Architecture
+# Architecture
 
-The application follows a layered REST API architecture:
+The application follows a RESTful backend architecture:
 
 ```text
-Client
-  │
-  │ HTTP Request
-  ▼
-┌──────────────────────────────┐
-│          API Routes          │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│         Middleware           │
-│ Authentication / Validation  │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│         Controllers          │
-│     Business Operations      │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│       Models / Eloquent      │
-│      Database Relations      │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│            MySQL             │
-└──────────────────────────────┘
-               │
-               ▼
-        JSON Response
+Client Application
+       │
+       │ HTTP Request
+       ▼
+┌───────────────────────┐
+│      API Routes       │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│      Middleware       │
+│ Authentication / Role │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│      Controllers      │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│       Requests        │
+│      Validation       │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│   Models / Eloquent   │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│        MySQL          │
+└───────────────────────┘
 ```
 
-The backend does not depend on a specific frontend technology.
-
-It can be integrated with:
-
-* React
-* Vue
-* Angular
-* Next.js
-* Mobile applications
-* Desktop applications
-* Third-party services
+The API does not depend on a specific client implementation.
 
 ---
 
-## Project Structure
+# Role-Based Access Control
+
+The application implements role-based authorization with two primary roles.
+
+| Resource           | Super Admin |               Admin              |
+| ------------------ | :---------: | :------------------------------: |
+| Account Management |      ✅      |                 ❌                |
+| Doctor Management  |      ✅      |                 ✅                |
+| Patient Management |      ✅      |                 ✅                |
+| Medical Records    |      ✅      |                 ✅                |
+| Appointments       |      ✅      |                 ✅                |
+| Prescriptions      |      ✅      | According to authorization rules |
+
+### Super Admin
+
+The Super Admin has the highest level of administrative access and is responsible for managing user accounts and hospital resources.
+
+### Admin
+
+The Admin can manage operational hospital data but does not have permission to manage system accounts.
+
+This separation prevents regular administrators from modifying account-level access and keeps sensitive authorization operations restricted to the Super Admin.
+
+---
+
+# Features
+
+## Authentication
+
+* User registration
+* User login
+* User logout
+* Token-based authentication
+* Laravel Sanctum
+* Protected API routes
+* Authentication middleware
+
+## Account Management
+
+Restricted to the **Super Admin**.
+
+* Create account
+* Retrieve accounts
+* Retrieve account details
+* Update account
+* Delete account
+
+## Doctor Management
+
+Available to authorized administrators.
+
+* Create doctor
+* Retrieve doctors
+* Retrieve doctor details
+* Update doctor
+* Delete doctor
+
+## Patient Management
+
+Available to authorized administrators.
+
+* Create patient
+* Retrieve patients
+* Retrieve patient details
+* Update patient
+* Delete patient
+
+## Appointment Management
+
+* Create appointment
+* Retrieve appointments
+* Retrieve appointment details
+* Update appointment
+* Update appointment status
+* Delete appointment
+
+## Medical Records
+
+* Create medical records
+* Retrieve medical records
+* Retrieve medical record details
+* Update medical records
+* Delete medical records
+* Patient relationship
+* Doctor relationship
+
+## Prescriptions
+
+* Create prescriptions
+* Retrieve prescriptions
+* Retrieve prescription details
+* Update prescriptions
+* Delete prescriptions
+* Medical record relationship
+
+---
+
+# Project Structure
+
+The repository contains the Laravel backend application inside the `backend` directory.
 
 ```text
-e-rumahsakit/
+Rest-Api-e-rumahsakit/
 │
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   ├── Middleware/
-│   │   └── Requests/
+├── backend/
 │   │
-│   ├── Models/
-│   └── Providers/
+│   ├── app/
+│   │   ├── Http/
+│   │   │   ├── Controllers/
+│   │   │   ├── Middleware/
+│   │   │   └── Requests/
+│   │   │
+│   │   ├── Models/
+│   │   └── Providers/
+│   │
+│   ├── bootstrap/
+│   │
+│   ├── config/
+│   │
+│   ├── database/
+│   │   ├── factories/
+│   │   ├── migrations/
+│   │   └── seeders/
+│   │
+│   ├── public/
+│   ├── resources/
+│   │
+│   ├── routes/
+│   │   ├── api.php
+│   │   ├── console.php
+│   │   └── web.php
+│   │
+│   ├── storage/
+│   ├── tests/
+│   │
+│   ├── .env.example
+│   ├── artisan
+│   ├── composer.json
+│   └── composer.lock
 │
-├── bootstrap/
-│
-├── config/
-│
-├── database/
-│   ├── factories/
-│   ├── migrations/
-│   └── seeders/
-│
-├── public/
-│
-├── resources/
-│
-├── routes/
-│   ├── api.php
-│   ├── console.php
-│   └── web.php
-│
-├── storage/
-│
-├── tests/
-│
-├── .env.example
-├── artisan
-├── composer.json
-├── composer.lock
+├── LICENSE
 └── README.md
 ```
 
 ---
 
-## Requirements
+# Requirements
 
-Before installing the application, ensure the following dependencies are available:
+Before running the application, make sure the following are installed:
 
 * PHP 8.2 or higher
 * Composer
-* MySQL 8.0 or higher
+* MySQL 8.0+ or compatible MySQL server
 * Git
 
-Required PHP extensions should include:
+Recommended PHP extensions:
 
 * OpenSSL
 * PDO
@@ -217,37 +259,47 @@ Required PHP extensions should include:
 
 ---
 
-## Installation
+# Installation
 
-### 1. Clone the Repository
+## 1. Clone Repository
 
 ```bash
 git clone https://github.com/MasMuham24/Rest-Api-e-rumahsakit.git
-
-cd Rest-Api-e-rumahsakit
 ```
 
-### 2. Install Dependencies
+Navigate to the backend:
+
+```bash
+cd Rest-Api-e-rumahsakit/backend
+```
+
+---
+
+## 2. Install Dependencies
 
 ```bash
 composer install
 ```
 
-### 3. Configure Environment
+---
 
-Copy the example environment configuration:
+## 3. Configure Environment
 
-```bash
-cp .env.example .env
-```
+Copy the environment configuration:
 
-For Windows:
+### Windows
 
 ```bash
 copy .env.example .env
 ```
 
-Generate the application key:
+### Linux / macOS
+
+```bash
+cp .env.example .env
+```
+
+Generate the Laravel application key:
 
 ```bash
 php artisan key:generate
@@ -255,7 +307,7 @@ php artisan key:generate
 
 ---
 
-## Database Configuration
+# Database Configuration
 
 Create a MySQL database:
 
@@ -263,7 +315,7 @@ Create a MySQL database:
 e_rumahsakit
 ```
 
-Configure the database connection inside `.env`:
+Configure the database connection in `.env`:
 
 ```env
 DB_CONNECTION=mysql
@@ -274,11 +326,11 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Update the credentials according to your environment.
+Update the credentials according to your local environment.
 
 ---
 
-## Database Migration
+# Database Migration
 
 Run the migrations:
 
@@ -298,43 +350,31 @@ Or:
 php artisan migrate --seed
 ```
 
-For a complete database reset during development:
+For development environments where the database needs to be completely rebuilt:
 
 ```bash
 php artisan migrate:fresh --seed
 ```
 
-> `migrate:fresh` removes all existing tables and data. Use it only in development environments.
+> `migrate:fresh` deletes all existing tables and data. Use it only when resetting a development database.
 
 ---
 
-## Authentication
+# Running the API
 
-The API uses **Laravel Sanctum** for token-based authentication.
+Start the Laravel development server:
 
-After a successful login, the API returns an access token that must be included when accessing protected resources.
-
-### Authorization Header
-
-```http
-Authorization: Bearer YOUR_ACCESS_TOKEN
+```bash
+php artisan serve
 ```
 
-Example:
+The backend will be available at:
 
-```http
-GET /api/appointments
-Accept: application/json
-Authorization: Bearer 1|xxxxxxxxxxxxxxxx
+```text
+http://127.0.0.1:8000
 ```
 
-Protected routes are handled through Laravel authentication middleware.
-
----
-
-# API Reference
-
-Base URL:
+API base URL:
 
 ```text
 http://127.0.0.1:8000/api
@@ -342,81 +382,126 @@ http://127.0.0.1:8000/api
 
 ---
 
+# Authentication
+
+The API uses **Laravel Sanctum** for token-based authentication.
+
+After a successful login, the API returns an access token.
+
+The token must be included in protected requests using the Bearer authentication scheme.
+
+```http
+Authorization: Bearer YOUR_ACCESS_TOKEN
+Accept: application/json
+```
+
+Example:
+
+```http
+GET /api/doctors
+Authorization: Bearer 1|xxxxxxxxxxxxxxxx
+Accept: application/json
+```
+
+---
+
+# API Endpoints
+
+All API endpoints are prefixed with:
+
+```text
+/api
+```
+
 ## Authentication
 
-| Method | Endpoint    | Auth | Description                             |
-| ------ | ----------- | ---: | --------------------------------------- |
-| POST   | `/register` |   No | Register a new user                     |
-| POST   | `/login`    |   No | Authenticate a user                     |
-| POST   | `/logout`   |  Yes | Revoke the current authentication token |
+| Method | Endpoint    | Authentication | Description            |
+| ------ | ----------- | -------------: | ---------------------- |
+| POST   | `/register` |             No | Register a new account |
+| POST   | `/login`    |             No | Authenticate user      |
+| POST   | `/logout`   |            Yes | Logout current user    |
+
+---
+
+## Account Management
+
+> Restricted to Super Admin.
+
+| Method | Endpoint       | Role        | Description       |
+| ------ | -------------- | ----------- | ----------------- |
+| GET    | `/admins`      | Super Admin | Retrieve accounts |
+| POST   | `/admins`      | Super Admin | Create account    |
+| GET    | `/admins/{id}` | Super Admin | Retrieve account  |
+| PUT    | `/admins/{id}` | Super Admin | Update account    |
+| DELETE | `/admins/{id}` | Super Admin | Delete account    |
 
 ---
 
 ## Doctors
 
-| Method | Endpoint        | Auth | Description          |
-| ------ | --------------- | ---: | -------------------- |
-| GET    | `/doctors`      |  Yes | Retrieve all doctors |
-| POST   | `/doctors`      |  Yes | Create a doctor      |
-| GET    | `/doctors/{id}` |  Yes | Retrieve a doctor    |
-| PUT    | `/doctors/{id}` |  Yes | Update a doctor      |
-| DELETE | `/doctors/{id}` |  Yes | Delete a doctor      |
+| Method | Endpoint        | Role                | Description      |
+| ------ | --------------- | ------------------- | ---------------- |
+| GET    | `/doctors`      | Admin / Super Admin | Retrieve doctors |
+| POST   | `/doctors`      | Admin / Super Admin | Create doctor    |
+| GET    | `/doctors/{id}` | Admin / Super Admin | Retrieve doctor  |
+| PUT    | `/doctors/{id}` | Admin / Super Admin | Update doctor    |
+| DELETE | `/doctors/{id}` | Admin / Super Admin | Delete doctor    |
 
 ---
 
 ## Patients
 
-| Method | Endpoint         | Auth | Description           |
-| ------ | ---------------- | ---: | --------------------- |
-| GET    | `/patients`      |  Yes | Retrieve all patients |
-| POST   | `/patients`      |  Yes | Create a patient      |
-| GET    | `/patients/{id}` |  Yes | Retrieve a patient    |
-| PUT    | `/patients/{id}` |  Yes | Update a patient      |
-| DELETE | `/patients/{id}` |  Yes | Delete a patient      |
+| Method | Endpoint         | Role                | Description       |
+| ------ | ---------------- | ------------------- | ----------------- |
+| GET    | `/patients`      | Admin / Super Admin | Retrieve patients |
+| POST   | `/patients`      | Admin / Super Admin | Create patient    |
+| GET    | `/patients/{id}` | Admin / Super Admin | Retrieve patient  |
+| PUT    | `/patients/{id}` | Admin / Super Admin | Update patient    |
+| DELETE | `/patients/{id}` | Admin / Super Admin | Delete patient    |
 
 ---
 
 ## Appointments
 
-| Method | Endpoint             | Auth | Description             |
-| ------ | -------------------- | ---: | ----------------------- |
-| GET    | `/appointments`      |  Yes | Retrieve appointments   |
-| POST   | `/appointments`      |  Yes | Create an appointment   |
-| GET    | `/appointments/{id}` |  Yes | Retrieve an appointment |
-| PUT    | `/appointments/{id}` |  Yes | Update an appointment   |
-| DELETE | `/appointments/{id}` |  Yes | Delete an appointment   |
+| Method | Endpoint             | Role                | Description           |
+| ------ | -------------------- | ------------------- | --------------------- |
+| GET    | `/appointments`      | Admin / Super Admin | Retrieve appointments |
+| POST   | `/appointments`      | Admin / Super Admin | Create appointment    |
+| GET    | `/appointments/{id}` | Admin / Super Admin | Retrieve appointment  |
+| PUT    | `/appointments/{id}` | Admin / Super Admin | Update appointment    |
+| DELETE | `/appointments/{id}` | Admin / Super Admin | Delete appointment    |
 
 ---
 
 ## Medical Records
 
-| Method | Endpoint                | Auth | Description               |
-| ------ | ----------------------- | ---: | ------------------------- |
-| GET    | `/medical-records`      |  Yes | Retrieve medical records  |
-| POST   | `/medical-records`      |  Yes | Create a medical record   |
-| GET    | `/medical-records/{id}` |  Yes | Retrieve a medical record |
-| PUT    | `/medical-records/{id}` |  Yes | Update a medical record   |
-| DELETE | `/medical-records/{id}` |  Yes | Delete a medical record   |
+| Method | Endpoint                | Role                | Description              |
+| ------ | ----------------------- | ------------------- | ------------------------ |
+| GET    | `/medical-records`      | Admin / Super Admin | Retrieve medical records |
+| POST   | `/medical-records`      | Admin / Super Admin | Create medical record    |
+| GET    | `/medical-records/{id}` | Admin / Super Admin | Retrieve medical record  |
+| PUT    | `/medical-records/{id}` | Admin / Super Admin | Update medical record    |
+| DELETE | `/medical-records/{id}` | Admin / Super Admin | Delete medical record    |
 
 ---
 
 ## Prescriptions
 
-| Method | Endpoint              | Auth | Description             |
-| ------ | --------------------- | ---: | ----------------------- |
-| GET    | `/prescriptions`      |  Yes | Retrieve prescriptions  |
-| POST   | `/prescriptions`      |  Yes | Create a prescription   |
-| GET    | `/prescriptions/{id}` |  Yes | Retrieve a prescription |
-| PUT    | `/prescriptions/{id}` |  Yes | Update a prescription   |
-| DELETE | `/prescriptions/{id}` |  Yes | Delete a prescription   |
+| Method | Endpoint              | Authentication | Description            |
+| ------ | --------------------- | -------------: | ---------------------- |
+| GET    | `/prescriptions`      |       Required | Retrieve prescriptions |
+| POST   | `/prescriptions`      |       Required | Create prescription    |
+| GET    | `/prescriptions/{id}` |       Required | Retrieve prescription  |
+| PUT    | `/prescriptions/{id}` |       Required | Update prescription    |
+| DELETE | `/prescriptions/{id}` |       Required | Delete prescription    |
 
 ---
 
 # API Response Format
 
-Successful responses follow a consistent JSON structure.
+The API returns JSON responses.
 
-Example:
+### Success Response
 
 ```json
 {
@@ -426,9 +511,7 @@ Example:
 }
 ```
 
-### Error Response
-
-Validation errors are returned in a structured format:
+### Validation Error
 
 ```json
 {
@@ -442,146 +525,168 @@ Validation errors are returned in a structured format:
 }
 ```
 
----
-
-# Example Authentication Flow
-
-The typical authentication flow is:
-
-```text
-POST /register
-       │
-       ▼
-POST /login
-       │
-       ▼
-Receive Access Token
-       │
-       ▼
-Authorization: Bearer TOKEN
-       │
-       ▼
-Access Protected Resources
-```
-
-Example login request:
-
-```http
-POST /api/login
-Content-Type: application/json
-Accept: application/json
-```
+### Authentication Error
 
 ```json
 {
-    "email": "admin@example.com",
-    "password": "password"
+    "message": "Unauthenticated."
 }
 ```
 
 ---
 
-# Database Relationships
+# Authorization Flow
 
-The system uses relational database modeling through Laravel Eloquent.
-
-The main entities are connected conceptually as follows:
+The authorization flow is based on the authenticated user's role.
 
 ```text
-                 ┌──────────────┐
-                 │    User      │
-                 └──────┬───────┘
-                        │
-              ┌─────────┴─────────┐
-              │                   │
-              ▼                   ▼
-        ┌──────────┐        ┌──────────┐
-        │  Doctor  │        │ Patient  │
-        └────┬─────┘        └────┬─────┘
-             │                   │
-             └────────┬──────────┘
-                      │
-                      ▼
-              ┌──────────────┐
-              │ Appointment  │
-              └──────┬───────┘
-                     │
-                     ▼
-             ┌─────────────────┐
-             │ Medical Record  │
-             └────────┬────────┘
-                      │
-                      ▼
-              ┌──────────────┐
-              │ Prescription │
-              └──────────────┘
+                    Authentication
+                          │
+                          ▼
+                  Laravel Sanctum
+                          │
+                          ▼
+                   Check User Role
+                          │
+              ┌───────────┴───────────┐
+              ▼                       ▼
+        Super Admin                  Admin
+              │                       │
+              ▼                       ▼
+      Full Administration       Operational Access
+              │                       │
+              ├── Accounts            ├── Doctors
+              ├── Doctors             ├── Patients
+              ├── Patients            ├── Appointments
+              ├── Appointments         └── Medical Records
+              └── Medical Records
 ```
 
-Relationships are implemented using Laravel Eloquent relationship methods.
+This ensures account-level operations remain restricted to the Super Admin.
+
+---
+
+# Database Relationships
+
+The application uses relational database modeling through Eloquent ORM.
+
+Core entities include:
+
+```text
+User
+ │
+ ├───────────────┐
+ │               │
+ ▼               ▼
+Doctor         Patient
+ │               │
+ └───────┬───────┘
+         │
+         ▼
+   Appointment
+         │
+         ▼
+  Medical Record
+         │
+         ▼
+   Prescription
+```
+
+The relationships allow hospital data to be connected across doctors, patients, appointments, medical records, and prescriptions.
 
 ---
 
 # API Testing
 
-The API can be tested using:
+All API endpoints have been tested using **Postman**.
 
-* Postman
-* Insomnia
-* Bruno
-* Hoppscotch
-* cURL
+Testing covers:
 
-Recommended workflow:
+* Authentication
+* Token generation
+* Protected routes
+* CRUD operations
+* Request validation
+* Role-based authorization
+* Unauthorized access handling
+* Resource relationships
+* JSON response handling
+
+Recommended testing flow:
 
 ```text
-1. Register
-      ↓
-2. Login
-      ↓
-3. Copy Access Token
-      ↓
-4. Set Bearer Token
-      ↓
-5. Test Protected Endpoints
-      ↓
-6. Perform CRUD Operations
+Register / Existing Account
+          │
+          ▼
+        Login
+          │
+          ▼
+    Receive Token
+          │
+          ▼
+   Set Bearer Token
+          │
+          ▼
+ Test Protected Endpoints
+          │
+          ▼
+ Validate Role Permissions
 ```
+
+---
+
+# Security
+
+The application implements several backend security practices:
+
+* Laravel Sanctum authentication
+* Role-based authorization
+* Protected API routes
+* Password hashing
+* Request validation
+* Authentication middleware
+* Environment-based configuration
+* Eloquent relationship constraints
+
+Sensitive configuration should never be committed to the repository.
+
+The `.env` file must remain excluded through `.gitignore`.
 
 ---
 
 # Development Commands
 
-### Start Development Server
+Start the application:
 
 ```bash
 php artisan serve
 ```
 
-### List API Routes
+View registered API routes:
 
 ```bash
 php artisan route:list --path=api
 ```
 
-### Clear Application Cache
+Clear application caches:
 
 ```bash
 php artisan optimize:clear
 ```
 
-### Run Migrations
+Run migrations:
 
 ```bash
 php artisan migrate
 ```
 
-### Run Seeders
+Run seeders:
 
 ```bash
 php artisan db:seed
 ```
 
-### Run Tests
+Run tests:
 
 ```bash
 php artisan test
@@ -589,59 +694,41 @@ php artisan test
 
 ---
 
-# Security Considerations
-
-The application follows several backend security practices:
-
-* Authentication through Laravel Sanctum
-* Protected API endpoints
-* Password hashing
-* Request validation
-* Authentication middleware
-* Environment-based configuration
-* Database relationship constraints
-
-Sensitive configuration must never be committed to the repository.
-
-The `.env` file should remain excluded through `.gitignore`.
-
----
-
 # Future Improvements
 
-Potential improvements for future releases:
+Potential improvements for future development:
 
-* [ ] OpenAPI / Swagger API documentation
+* [ ] OpenAPI / Swagger documentation
 * [ ] API versioning
 * [ ] Pagination
 * [ ] Advanced filtering and searching
-* [ ] Role and permission management
-* [ ] Rate limiting
-* [ ] Automated feature tests
+* [ ] API rate limiting
+* [ ] Automated feature testing
 * [ ] Unit testing
 * [ ] API request logging
 * [ ] Docker support
 * [ ] CI/CD pipeline
+* [ ] Notification service
 * [ ] Hospital queue management
 * [ ] Doctor scheduling
 * [ ] Billing management
-* [ ] Notification service
 
 ---
 
 # Project Objectives
 
-This project was developed to demonstrate practical backend engineering capabilities, particularly in:
+This project demonstrates practical backend development capabilities in:
 
 * RESTful API development
 * Laravel application architecture
 * Authentication and authorization
-* Database relationship modeling
-* CRUD implementation
-* Request validation
+* Role-based access control
+* CRUD operations
+* Relational database design
 * Eloquent ORM
+* Request validation
 * API response design
-* Backend security practices
+* Backend security
 * API testing
 
 ---
@@ -656,11 +743,11 @@ See the [`LICENSE`](./LICENSE) file for details.
 
 # Author
 
-**MasMuham24**
+**Muhammad Syafi'i**
 
 Backend / Fullstack Developer
 
-### Core Technologies
+### Technologies
 
 ```text
 PHP
@@ -671,15 +758,14 @@ Laravel Sanctum
 Eloquent ORM
 Git
 GitHub
+Postman
 ```
 
 ---
 
-# Repository
+## Repository
 
-GitHub:
-
-https://github.com/MasMuham24/Rest-Api-e-rumahsakit
+[GitHub Repository](https://github.com/MasMuham24/Rest-Api-e-rumahsakit)
 
 ---
 
