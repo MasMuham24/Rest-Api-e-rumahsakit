@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AppointmentController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DoctorController;
+use App\Http\Controllers\Api\DoctorScheduleController;
 use App\Http\Controllers\Api\MedicalRecordController;
 use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\PrescriptionController;
@@ -16,7 +17,7 @@ Route::prefix('auth')->group(function() {
         Route::get('/profile', [AuthController::class, 'profile']);
         Route::post('/logout', [AuthController::class, 'logout']);
     });
-}); 
+});
 
 Route::middleware(['auth:sanctum', 'role:superadmin'])->prefix('admin')->group(function() {
     Route::post('/', [AdminController::class, 'store']);
@@ -64,4 +65,13 @@ Route::prefix('prescriptions')->middleware(['auth:sanctum', 'role:superadmin,adm
     Route::get('/{id}', [PrescriptionController::class, 'show']);
     Route::put('/{id}', [PrescriptionController::class, 'update']);
     Route::delete('/{id}', [PrescriptionController::class, 'destroy']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/doctor-schedules', [DoctorScheduleController::class,'index'])->middleware('role:admin,doctor,patient');
+    Route::get('/doctor-schedules/{doctorSchedule}', [DoctorScheduleController::class,'show'])->middleware('role:admin,doctor,patient');
+    Route::post('/doctor-schedules', [DoctorScheduleController::class,'store'])->middleware('role:admin');
+    Route::put('/doctor-schedules/{doctorSchedule}', [DoctorScheduleController::class,'update'])->middleware('role:admin');
+    Route::patch('/doctor-schedules/{doctorSchedule}', [DoctorScheduleController::class,'update'])->middleware('role:admin');
+    Route::delete('/doctor-schedules/{doctorSchedule}', [DoctorScheduleController::class,'destroy'])->middleware('role:admin');
 });

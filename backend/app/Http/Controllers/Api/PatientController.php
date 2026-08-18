@@ -13,46 +13,55 @@ class PatientController extends Controller
         $patients = Patient::latest()->get();
         return response()->json([
             'success' => true,
-            'message' => 'Patient data retrivied successfully',
+            'message' => 'Patient data retrieved successfully',
             'data' => $patients
-        ]);
+        ], 200);
     }
 
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'nik' => 'required|string|max:16|unique:patients,nik',
-        'birth_date' => 'required|date',
-        'gender' => 'required|in:L,P',
-        'phone' => 'required|string|max:20',
-        'address' => 'required|string',
-        'blood_type' => 'required|in:A,B,O,AB',
-    ]);
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'nik' => 'required|string|max:16|unique:patients,nik',
+            'birth_date' => 'required|date',
+            'gender' => 'required|in:L,P',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string',
+            'blood_type' => 'required|in:A,B,O,AB',
+        ]);
 
-    $lastPatient = Patient::latest()->first();
+        $lastPatient = Patient::orderByRaw(
+            "CAST(SUBSTRING(medical_record_number, 3) AS UNSIGNED) DESC"
+        )->first();
 
-    $number = $lastPatient
-        ? ((int) substr($lastPatient->medical_record_number, 2)) + 1
-        : 1;
+        $number = $lastPatient
+            ? ((int) substr($lastPatient->medical_record_number, 2)) + 1
+            : 1;
 
-    $medicalRecordNumber = 'RM' . str_pad($number, 6, '0', STR_PAD_LEFT);
+        $medicalRecordNumber = 'RM' . str_pad(
+            $number,
+            6,
+            '0',
+            STR_PAD_LEFT
+        );
 
-    $patient = Patient::create([
-        ...$validated,
-        'medical_record_number' => $medicalRecordNumber,
-    ]);
+        $patient = Patient::create([
+            ...$validated,
+            'medical_record_number' => $medicalRecordNumber,
+        ]);
 
-    return response()->json([
-        'success' => true,
-        'message' => 'Patient created successfully',
-        'data' => $patient,
-    ], 201);
-}
+        return response()->json([
+            'success' => true,
+            'message' => 'Patient created successfully',
+            'data' => $patient,
+        ], 201);
+    }
+
     public function show(string $id)
     {
         $patient = Patient::find($id);
-        if(! $patient) {
+
+        if (!$patient) {
             return response()->json([
                 'success' => false,
                 'message' => 'Patient not found'
@@ -61,7 +70,7 @@ public function store(Request $request)
 
         return response()->json([
             'success' => true,
-            'message' => 'Patient data retrivied successfully', 
+            'message' => 'Patient data retrieved successfully',
             'data' => $patient
         ], 200);
     }
@@ -69,7 +78,8 @@ public function store(Request $request)
     public function update(Request $request, string $id)
     {
         $patient = Patient::find($id);
-        if(! $patient) {
+
+        if (!$patient) {
             return response()->json([
                 'success' => false,
                 'message' => 'Patient not found'
@@ -83,9 +93,10 @@ public function store(Request $request)
             'phone' => 'required|string|max:20',
             'address' => 'required|string',
             'blood_type' => 'required|in:A,B,O,AB',
-        ]); 
+        ]);
 
         $patient->update($validated);
+
         return response()->json([
             'success' => true,
             'message' => 'Patient updated successfully',
@@ -96,7 +107,8 @@ public function store(Request $request)
     public function destroy(string $id)
     {
         $patient = Patient::find($id);
-        if(! $patient) {
+
+        if (!$patient) {
             return response()->json([
                 'success' => false,
                 'message' => 'Patient not found'
@@ -104,6 +116,7 @@ public function store(Request $request)
         }
 
         $patient->delete();
+
         return response()->json([
             'success' => true,
             'message' => 'Patient deleted successfully',
