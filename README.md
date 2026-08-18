@@ -1,41 +1,51 @@
 # e-RumahSakit REST API
 
-A RESTful API for hospital management systems, built with **Laravel 11**.
+A production-oriented **RESTful API for hospital management systems**, built with **Laravel 12**.
 
-e-RumahSakit provides a backend service for managing hospital operations, including authentication, user accounts, doctors, patients, appointments, medical records, and prescriptions.
+e-RumahSakit provides a backend service for managing essential hospital operations, including authentication, user accounts, doctors, patients, appointments, medical records, and prescriptions.
 
-The application is designed as a **backend-only REST API** and is independent of any frontend framework. It can be consumed by web applications, mobile applications, or other services through HTTP requests and JSON responses.
+The application is designed as a **backend-only REST API**, making it independent of any frontend framework and suitable for consumption by web applications, mobile applications, or other client services through HTTP requests and JSON responses.
 
 ---
 
 ## Overview
 
-The system provides a structured backend for managing healthcare-related data while implementing authentication and role-based authorization.
+e-RumahSakit is designed to demonstrate the implementation of a structured hospital management backend using modern Laravel development practices.
 
-The API follows RESTful principles and uses **Laravel Sanctum** for token-based authentication.
+The API implements:
 
-### Core Capabilities
-
-* Authentication and authorization
-* Role-based access control
-* Account management
-* Doctor management
-* Patient management
-* Appointment management
-* Medical record management
-* Prescription management
-* Relational database management
+* RESTful API architecture
+* Laravel Sanctum authentication
+* Role-based authorization
+* CRUD operations
 * Request validation
+* API Resources
+* Eloquent ORM
+* Relational database relationships
 * Protected API endpoints
+* Consistent JSON responses
+* Postman API testing
+
+### Core Modules
+
+| Module                 | Description                                       |
+| ---------------------- | ------------------------------------------------- |
+| Authentication         | Register, login, logout, and token authentication |
+| Account Management     | Administrative account management                 |
+| Doctor Management      | CRUD operations for doctors                       |
+| Patient Management     | CRUD operations for patients                      |
+| Appointment Management | Hospital appointment management                   |
+| Medical Records        | Patient medical record management                 |
+| Prescriptions          | Prescription management                           |
 
 ---
 
-## Technology Stack
+# Technology Stack
 
 | Technology      | Purpose                      |
 | --------------- | ---------------------------- |
 | PHP 8.2+        | Backend programming language |
-| Laravel 11      | Backend framework            |
+| Laravel 12      | Backend framework            |
 | Laravel Sanctum | Token-based authentication   |
 | MySQL           | Relational database          |
 | Eloquent ORM    | Database interaction         |
@@ -43,6 +53,7 @@ The API follows RESTful principles and uses **Laravel Sanctum** for token-based 
 | REST API        | Application architecture     |
 | JSON            | API response format          |
 | Postman         | API testing                  |
+| Git / GitHub    | Version control              |
 
 ---
 
@@ -72,8 +83,13 @@ Client Application
            │
            ▼
 ┌───────────────────────┐
-│       Requests        │
+│   Form Requests /     │
 │      Validation       │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│    API Resources      │
 └──────────┬────────────┘
            │
            ▼
@@ -87,32 +103,49 @@ Client Application
 └───────────────────────┘
 ```
 
-The API does not depend on a specific client implementation.
+The API does not depend on a specific frontend implementation.
 
 ---
 
 # Role-Based Access Control
 
-The application implements role-based authorization with two primary roles.
+The API implements role-based authorization using two administrative roles.
 
-| Resource           | Super Admin |               Admin              |
-| ------------------ | :---------: | :------------------------------: |
-| Account Management |      ✅      |                 ❌                |
-| Doctor Management  |      ✅      |                 ✅                |
-| Patient Management |      ✅      |                 ✅                |
-| Medical Records    |      ✅      |                 ✅                |
-| Appointments       |      ✅      |                 ✅                |
-| Prescriptions      |      ✅      | According to authorization rules |
+| Resource           | Super Admin | Admin |
+| ------------------ | :---------: | :---: |
+| Account Management |      ✅      |   ❌   |
+| Doctor Management  |      ✅      |   ✅   |
+| Patient Management |      ✅      |   ✅   |
+| Medical Records    |      ✅      |   ✅   |
+| Appointments       |      ✅      |   ✅   |
+| Prescriptions      |      ✅      |   ✅   |
 
 ### Super Admin
 
-The Super Admin has the highest level of administrative access and is responsible for managing user accounts and hospital resources.
+The Super Admin has the highest administrative privileges.
+
+Responsibilities include:
+
+* Managing user accounts
+* Managing doctors
+* Managing patients
+* Managing appointments
+* Managing medical records
+* Managing prescriptions
 
 ### Admin
 
-The Admin can manage operational hospital data but does not have permission to manage system accounts.
+The Admin is responsible for operational hospital data.
 
-This separation prevents regular administrators from modifying account-level access and keeps sensitive authorization operations restricted to the Super Admin.
+Admin permissions include:
+
+* Managing doctors
+* Managing patients
+* Managing appointments
+* Managing medical records
+* Managing prescriptions
+
+Account management remains restricted to the Super Admin.
 
 ---
 
@@ -120,17 +153,25 @@ This separation prevents regular administrators from modifying account-level acc
 
 ## Authentication
 
+The authentication system is implemented using Laravel Sanctum.
+
+Features:
+
 * User registration
 * User login
 * User logout
 * Token-based authentication
-* Laravel Sanctum
 * Protected API routes
 * Authentication middleware
+* Bearer token authentication
+
+---
 
 ## Account Management
 
-Restricted to the **Super Admin**.
+Restricted to **Super Admin**.
+
+Features:
 
 * Create account
 * Retrieve accounts
@@ -138,9 +179,13 @@ Restricted to the **Super Admin**.
 * Update account
 * Delete account
 
+---
+
 ## Doctor Management
 
-Available to authorized administrators.
+Available to **Admin** and **Super Admin**.
+
+Features:
 
 * Create doctor
 * Retrieve doctors
@@ -148,9 +193,13 @@ Available to authorized administrators.
 * Update doctor
 * Delete doctor
 
+---
+
 ## Patient Management
 
-Available to authorized administrators.
+Available to **Admin** and **Super Admin**.
+
+Features:
 
 * Create patient
 * Retrieve patients
@@ -158,7 +207,13 @@ Available to authorized administrators.
 * Update patient
 * Delete patient
 
+---
+
 ## Appointment Management
+
+Available to **Admin** and **Super Admin**.
+
+Features:
 
 * Create appointment
 * Retrieve appointments
@@ -167,7 +222,15 @@ Available to authorized administrators.
 * Update appointment status
 * Delete appointment
 
+Appointments connect patients with doctors and provide a structured workflow for managing scheduled consultations.
+
+---
+
 ## Medical Records
+
+Available to **Admin** and **Super Admin**.
+
+Features:
 
 * Create medical records
 * Retrieve medical records
@@ -177,7 +240,15 @@ Available to authorized administrators.
 * Patient relationship
 * Doctor relationship
 
+Medical records provide a structured connection between patients, doctors, and healthcare history.
+
+---
+
 ## Prescriptions
+
+Available to authenticated and authorized users according to the configured role permissions.
+
+Features:
 
 * Create prescriptions
 * Retrieve prescriptions
@@ -201,13 +272,13 @@ Rest-Api-e-rumahsakit/
 │   │   ├── Http/
 │   │   │   ├── Controllers/
 │   │   │   ├── Middleware/
-│   │   │   └── Requests/
+│   │   │   ├── Requests/
+│   │   │   └── Resources/
 │   │   │
 │   │   ├── Models/
 │   │   └── Providers/
 │   │
 │   ├── bootstrap/
-│   │
 │   ├── config/
 │   │
 │   ├── database/
@@ -217,7 +288,6 @@ Rest-Api-e-rumahsakit/
 │   │
 │   ├── public/
 │   ├── resources/
-│   │
 │   ├── routes/
 │   │   ├── api.php
 │   │   ├── console.php
@@ -267,7 +337,7 @@ Recommended PHP extensions:
 git clone https://github.com/MasMuham24/Rest-Api-e-rumahsakit.git
 ```
 
-Navigate to the backend:
+Navigate to the backend directory:
 
 ```bash
 cd Rest-Api-e-rumahsakit/backend
@@ -285,7 +355,7 @@ composer install
 
 ## 3. Configure Environment
 
-Copy the environment configuration:
+Copy the environment configuration file.
 
 ### Windows
 
@@ -299,7 +369,7 @@ copy .env.example .env
 cp .env.example .env
 ```
 
-Generate the Laravel application key:
+Generate the application key:
 
 ```bash
 php artisan key:generate
@@ -315,7 +385,7 @@ Create a MySQL database:
 e_rumahsakit
 ```
 
-Configure the database connection in `.env`:
+Configure the database connection inside `.env`:
 
 ```env
 DB_CONNECTION=mysql
@@ -344,19 +414,19 @@ If seeders are available:
 php artisan db:seed
 ```
 
-Or:
+Or run migrations and seeders together:
 
 ```bash
 php artisan migrate --seed
 ```
 
-For development environments where the database needs to be completely rebuilt:
+For a complete development database reset:
 
 ```bash
 php artisan migrate:fresh --seed
 ```
 
-> `migrate:fresh` deletes all existing tables and data. Use it only when resetting a development database.
+> **Warning:** `migrate:fresh` removes all existing tables and data. Use it only when resetting a development database.
 
 ---
 
@@ -386,9 +456,9 @@ http://127.0.0.1:8000/api
 
 The API uses **Laravel Sanctum** for token-based authentication.
 
-After a successful login, the API returns an access token.
+After successful authentication, an access token can be used to access protected endpoints.
 
-The token must be included in protected requests using the Bearer authentication scheme.
+Include the token using the Bearer authentication scheme:
 
 ```http
 Authorization: Bearer YOUR_ACCESS_TOKEN
@@ -407,7 +477,7 @@ Accept: application/json
 
 # API Endpoints
 
-All API endpoints are prefixed with:
+All endpoints are prefixed with:
 
 ```text
 /api
@@ -415,11 +485,11 @@ All API endpoints are prefixed with:
 
 ## Authentication
 
-| Method | Endpoint    | Authentication | Description            |
-| ------ | ----------- | -------------: | ---------------------- |
-| POST   | `/register` |             No | Register a new account |
-| POST   | `/login`    |             No | Authenticate user      |
-| POST   | `/logout`   |            Yes | Logout current user    |
+| Method | Endpoint    | Auth | Description            |
+| ------ | ----------- | :--: | ---------------------- |
+| POST   | `/register` |   ❌  | Register a new account |
+| POST   | `/login`    |   ❌  | Authenticate user      |
+| POST   | `/logout`   |   ✅  | Logout current user    |
 
 ---
 
@@ -487,19 +557,21 @@ All API endpoints are prefixed with:
 
 ## Prescriptions
 
-| Method | Endpoint              | Authentication | Description            |
-| ------ | --------------------- | -------------: | ---------------------- |
-| GET    | `/prescriptions`      |       Required | Retrieve prescriptions |
-| POST   | `/prescriptions`      |       Required | Create prescription    |
-| GET    | `/prescriptions/{id}` |       Required | Retrieve prescription  |
-| PUT    | `/prescriptions/{id}` |       Required | Update prescription    |
-| DELETE | `/prescriptions/{id}` |       Required | Delete prescription    |
+| Method | Endpoint              | Role            | Description            |
+| ------ | --------------------- | --------------- | ---------------------- |
+| GET    | `/prescriptions`      | Authorized User | Retrieve prescriptions |
+| POST   | `/prescriptions`      | Authorized User | Create prescription    |
+| GET    | `/prescriptions/{id}` | Authorized User | Retrieve prescription  |
+| PUT    | `/prescriptions/{id}` | Authorized User | Update prescription    |
+| DELETE | `/prescriptions/{id}` | Authorized User | Delete prescription    |
+
+> Actual authorization is enforced by the application's configured middleware and role rules.
 
 ---
 
 # API Response Format
 
-The API returns JSON responses.
+The API uses JSON for request and response payloads.
 
 ### Success Response
 
@@ -537,7 +609,7 @@ The API returns JSON responses.
 
 # Authorization Flow
 
-The authorization flow is based on the authenticated user's role.
+Authorization is handled through authentication middleware and role-based access control.
 
 ```text
                     Authentication
@@ -558,11 +630,12 @@ The authorization flow is based on the authenticated user's role.
               ├── Accounts            ├── Doctors
               ├── Doctors             ├── Patients
               ├── Patients            ├── Appointments
-              ├── Appointments         └── Medical Records
-              └── Medical Records
+              ├── Appointments        ├── Medical Records
+              ├── Medical Records     └── Prescriptions
+              └── Prescriptions
 ```
 
-This ensures account-level operations remain restricted to the Super Admin.
+This authorization structure prevents unauthorized users from accessing administrative operations.
 
 ---
 
@@ -575,30 +648,39 @@ Core entities include:
 ```text
 User
  │
- ├───────────────┐
- │               │
- ▼               ▼
-Doctor         Patient
- │               │
- └───────┬───────┘
-         │
-         ▼
-   Appointment
-         │
-         ▼
-  Medical Record
-         │
-         ▼
-   Prescription
+ ├─────────────────────┐
+ │                     │
+ ▼                     ▼
+Doctor               Patient
+ │                     │
+ └──────────┬──────────┘
+            │
+            ▼
+      Appointment
+            │
+            ▼
+     Medical Record
+            │
+            ▼
+      Prescription
 ```
 
-The relationships allow hospital data to be connected across doctors, patients, appointments, medical records, and prescriptions.
+These relationships allow hospital data to be connected across:
+
+* Users
+* Doctors
+* Patients
+* Appointments
+* Medical Records
+* Prescriptions
+
+Foreign key constraints are used to maintain relational data integrity.
 
 ---
 
 # API Testing
 
-All API endpoints have been tested using **Postman**.
+The API has been tested using **Postman**.
 
 Testing covers:
 
@@ -611,6 +693,9 @@ Testing covers:
 * Unauthorized access handling
 * Resource relationships
 * JSON response handling
+* Appointment management
+* Medical record management
+* Prescription management
 
 Recommended testing flow:
 
@@ -645,8 +730,9 @@ The application implements several backend security practices:
 * Password hashing
 * Request validation
 * Authentication middleware
+* Foreign key constraints
 * Environment-based configuration
-* Eloquent relationship constraints
+* Eloquent ORM
 
 Sensitive configuration should never be committed to the repository.
 
@@ -656,7 +742,7 @@ The `.env` file must remain excluded through `.gitignore`.
 
 # Development Commands
 
-Start the application:
+Start the development server:
 
 ```bash
 php artisan serve
@@ -686,32 +772,11 @@ Run seeders:
 php artisan db:seed
 ```
 
-Run tests:
+Run the test suite:
 
 ```bash
 php artisan test
 ```
-
----
-
-# Future Improvements
-
-Potential improvements for future development:
-
-* [ ] OpenAPI / Swagger documentation
-* [ ] API versioning
-* [ ] Pagination
-* [ ] Advanced filtering and searching
-* [ ] API rate limiting
-* [ ] Automated feature testing
-* [ ] Unit testing
-* [ ] API request logging
-* [ ] Docker support
-* [ ] CI/CD pipeline
-* [ ] Notification service
-* [ ] Hospital queue management
-* [ ] Doctor scheduling
-* [ ] Billing management
 
 ---
 
@@ -720,16 +785,30 @@ Potential improvements for future development:
 This project demonstrates practical backend development capabilities in:
 
 * RESTful API development
-* Laravel application architecture
-* Authentication and authorization
+* Laravel 12 application architecture
+* Laravel Sanctum authentication
 * Role-based access control
 * CRUD operations
 * Relational database design
 * Eloquent ORM
 * Request validation
-* API response design
+* API Resources
+* JSON API response design
 * Backend security
-* API testing
+* API testing with Postman
+* Database relationship management
+
+---
+
+# Project Status
+
+**Version:** `V1.0`
+
+**Status:** `Completed`
+
+The V1 release focuses on the core backend functionality required for a hospital management REST API.
+
+Future versions may introduce additional hospital modules such as doctor scheduling, pharmacy management, queue management, billing, notifications, and other advanced healthcare workflows.
 
 ---
 
@@ -763,7 +842,7 @@ Postman
 
 ---
 
-## Repository
+# Repository
 
 [GitHub Repository](https://github.com/MasMuham24/Rest-Api-e-rumahsakit)
 
@@ -772,5 +851,5 @@ Postman
 <p align="center">
   <strong>e-RumahSakit REST API</strong>
   <br>
-  Backend service built with Laravel
+  Create by Muhammad Syafi'i
 </p>
